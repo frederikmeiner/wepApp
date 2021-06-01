@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="da">
+
+<head>
+  <meta charset="utf-8">
+  <title>Jagt Områder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1"">
+  <meta name=" description" content="Find og tilføj jagt områder">
+  <meta name="author" content="Frederik Meiner og Morten Gedsted Hansen">
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+</head>
+
+<body onhashchange="pageChange()">
+  <!-- tabbar navigation -->
+  <nav id="tabbar" class="tabbar hide">
+    <a href="#home"><i class="fas fa-map"></i></a>
+    <a href="#add"><i class="fas fa-plus-square"></i></a>
+    <a href="#favorite"><i class="fas fa-star"></i></a>
+    <a href="#profile"><i class="fas fa-user-circle"></i></a>
+  </nav>
+
+
+  <!-- pages -->
+  <!-- home page -->
+  <section id="home" class="page">
+    <header class="topbar">
+      <h2>Jagt Områder</h2>
+    </header>
+    <input class="input" type="search" placeholder="Søg efter område" onkeyup="search(this.value)">
+    <div id="place-container" class="grid-container"></div>
+  </section>
+
+
+  <!-- add page -->
+  <section id="add" class="page">
+    <header class="topbar">
+      <h2>Tilføj</h2>
+    </header>
+    <form id="userForm">
+      <h2>Tilføj nyt Jagtområde</h2>
+      <input class="input" type="text" id="name" placeholder="Skriv område navn" required>
+      <input class="input" type="text" id="city" placeholder="Skriv by for området" required>
+      <input class="input" type="text" id="description" placeholder="Skriv en beskrivelse af området" required>
+      <input class="input" type="text" id="animal" placeholder="Hvilke dyr kan jages?" required>
+      <input class="input" type="text" id="weapon" placeholder="Hvilke våben er tilladte?" required>
+      <h3>Ejer oplysninger</h3>
+      <input class="input" type="text" id="owner" placeholder="Navnet på ejeren" required>
+      <input class="input" type="email" id="mail" placeholder="Skriv ejers Email" required>
+      <input class="input" type="text" id="address" placeholder="Skriv ejers adresse" required>
+      <input class="input" type="text" id="tlf" placeholder="Skriv ejers telefonnr." required>
+      <h3>Tilføj billede af området</h3>
+      <input class="input" type="text" id="img" placeholder="Paste an image url" required>
+      <button type="button" name="button" onclick="createPlace()">Tilføj område</button>
+    </form>
+  </section>
+
+  <section id="edit" class="page">
+    <header class="topbar">
+      <h2>Rediger område</h2>
+    </header>
+    <form id="update-place">
+      <h2>Rediger område</h2>
+      <input class="input" type="text" id="name-update" placeholder="Skriv område navn" required>
+      <input class="input" type="text" id="city-update" placeholder="Skriv by for området" required>
+      <input class="input" type="text" id="description-update" placeholder="Skriv en beskrivelse af området" required>
+      <input class="input" type="text" id="animal-update" placeholder="Hvilke dyr kan jages?" required>
+      <input class="input" type="text" id="weapon-update" placeholder="Hvilke våben er tilladte?" required>
+      <h3>Ejer oplysninger</h3>
+      <input class="input" type="text" id="owner-update" placeholder="Navnet på ejeren" required>
+      <input class="input" type="email" id="mail-update" placeholder="Skriv ejers Email" required>
+      <input class="input" type="text" id="address-update" placeholder="Skriv ejers adresse" required>
+      <input class="input" type="text" id="tlf-update" placeholder="Skriv ejers telefonnr." required>
+      <h3>Tilføj billede af området</h3>
+      <input class="input" type="text" id="img-update" placeholder="Paste an image url" required>
+      <button type="button" name="button" onclick="updatePlace()">Opdater område</button>
+    </form>
+  </section>
+
+  <!-- favorite page -->
+  <section id="favorite" class="page">
+    <header class="topbar">
+      <h2>Favoritter</h2>
+    </header>
+    <section id="fav-place-container" class="grid-container"></section>
+  </section>
+
+  <!-- profile page -->
+  <section id="profile" class="page">
+    <header class="topbar">
+      <h2>Profil</h2>
+      <a class="right" href="#" onclick="logout()">Log ud</a>
+    </header>
+    <div class="profileContainer">
+      <div class="profilePicContainer">
+        <img id="profilePic" src="img/placeholder.jpg" alt="pb">
+      </div>
+      <div class="formContainer">
+        <form class="user-details">
+          <label for="user-name">Navn</label>
+          <input class="input" type="text" id="user-name" placeholder="Type your name" required>
+          <label for="user-mail">Email</label>
+          <input class="input" type="email" id="user-mail" placeholder="Type your mail" disabled>
+          <label for="user-birthdate">Fødselsdato</label>
+          <input class="input" type="text" id="user-birthdate" placeholder="Type your birthdate" required>
+          <label for="user-img">Profil billede</label>
+          <input class="input" type="text" id="user-img" placeholder="Indsæt link til profilbillede" accept="image/*">
+          <button type="button" name="button" onclick="updateUser()">Gem</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- login page -->
+  <section id="login" class="page">
+    <header class="topbar">
+      <h2>Log Ind</h2>
+    </header>
+    <!-- firebase auth container  -->
+    <section id="firebaseui-auth-container"></section>
+  </section>
+
+  <!-- loader  -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+  <!--Fontawsome kit--->
+  <script src="https://kit.fontawesome.com/8dfea7dc78.js" crossorigin="anonymous"></script>
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
+  <!-- spa js file -->
+  <script src="js/spa.js"></script>
+  <!-- main js file -->
+  <script src="js/main.js"></script>
+</body>
+
+</html>

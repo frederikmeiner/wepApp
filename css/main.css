@@ -1,0 +1,469 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+/* ---------- root variables ---------- */
+:root {
+  --green: #265943;
+  --light-green: #6ea171;
+  --sand: #e1d798;
+  --light-grey: #f1f1f4;
+  --blue: #53adaf;
+  --text-color-light: #f1f1f1;
+  --text-color-dark: #333;
+  --icon-color-fill: #f1f1f1;
+  --font-family: 'Roboto', sans-serif;
+}
+
+/* ---------- general styling ---------- */
+html {
+  color: var(--text-color-dark);
+  background-color: var(--green);
+  font-family: var(--font-family);
+  height: 100%;
+  text-align: center;
+  width: 100%;
+  font-weight: 200;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: 300;
+  letter-spacing: 3px;
+}
+
+
+/* ---------- topbar styling ---------- */
+.topbar {
+  background-color: var(--green);
+  color: var(--text-color-light);
+  padding: 13.5px;
+  text-transform: uppercase;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+}
+
+.topbar h2 {
+  margin: 0;
+  font-weight: 300;
+}
+
+.topbar a {
+  text-decoration: none;
+  color: var(--text-color-light);
+  position: absolute;
+  top: 20px;
+}
+
+.topbar a.left {
+  left: 20px;
+}
+
+.topbar a.right {
+  right: 20px;
+}
+
+/* ---------- tabbar styling ---------- */
+.tabbar {
+  background-color: var(--green);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  border-top: 1px solid white;
+}
+
+/* Style the links inside the navigation bar */
+.tabbar a {
+  display: inline-block;
+  /*Gives the icons a stroke effect instead of a solid color */
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: #f1f1f1;
+  color: transparent;
+  text-align: center;
+  padding: 15px 7%;
+  text-decoration: none;
+  font-size: 1.8em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Change the color of links on hover */
+.tabbar a:hover {
+  background-color: var(--light-grey);
+  color: var(--text-color-dark);
+}
+
+/* Add a color to the active/current link */
+.tabbar a.active {
+  background-color: var(--green);
+  color: var(--icon-color-fill);
+  -webkit-text-stroke-color: transparent;
+}
+
+/* ---------- page styling ---------- */
+.page {
+  display: none;
+  /*min heigh is screen heigh minus height of tab and top bar */
+  min-height: calc(100vh - 110px);
+  /* background: var(--sand);*/
+  animation: fadeIn 0.4s;
+  /* padding equals height of tabbar and topbar */
+  padding: 55px 0;
+
+  background-image: url(/img/bg.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  height: auto;
+}
+
+
+/* ---------- animations ---------- */
+/* fade in */
+@keyframes fadeIn {
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- loader styling ---------- */
+#loader {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999999999;
+  overflow: hidden;
+  background: var(--loader-background-color);
+  text-align: center;
+}
+
+.spinner {
+  border: 5px solid var(--light-grey);
+  border-radius: 50%;
+  border-top: 5px solid var(--light-green);
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 1s linear infinite;
+  /* Safari */
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.hide {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.4s, opacity 0.4s linear;
+}
+
+/* ---------- authentication styling ---------- */
+#firebaseui-auth-container {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.firebaseui-form-actions {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+
+.firebaseui-container {
+  font-family: var(--font-family);
+  font: 16px var(--font-family);
+}
+
+.firebaseui-title {
+  text-align: center;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.mdl-button--raised.mdl-button--colored,
+.mdl-button--raised.mdl-button--colored:active,
+.mdl-button--raised.mdl-button--colored:hover {
+  background: var(--green);
+  color: #fff;
+  border-radius: 0;
+}
+
+.firebaseui-id-submit .firebaseui-button .mdl-button .mdl-js-button .mdl-button--raised .mdl-button--colored {
+  left: -50%;
+}
+
+.firebaseui-textfield.mdl-textfield .firebaseui-label::after {
+  background-color: var(--green);
+}
+
+/*Profile styling*/
+
+#profilePic {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+
+}
+
+.profilePicContainer {
+  padding-top: 2%;
+}
+
+.user-details {
+  padding-top: 5%;
+  padding-bottom: 20%;
+}
+
+/*Edit page styling*/
+#edit {
+  padding-bottom: 25%;
+  background-color: var(--light-grey);
+  background-image: none;
+}
+
+/*Add page styling*/
+#add {
+  padding-bottom: 25%;
+  background-color: var(--light-grey);
+  background-image: none;
+}
+
+#profile {
+  background-color: var(--light-grey);
+  background-image: none;
+}
+
+/* Grid container */
+.grid-container {
+  display: grid;
+  grid-template-columns: 100%;
+  padding: 10px;
+}
+
+@media (min-width: 340px) {
+  .grid-container>article {
+    margin: 0 auto;
+  }
+
+}
+
+@media (min-width: 624px) {
+
+  /*Makes place have 2 beside eachother*/
+  .grid-container {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 3%;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 992px) {
+
+  /*Makes place have 3 beside eachother*/
+  .grid-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 1300px) {
+
+  /*Makes place have 4 beside eachother*/
+  .grid-container {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+
+.grid-container>article {
+  background-color: var(--light-grey);
+  border-radius: 15px;
+  margin-bottom: 20px;
+  max-width: 300px;
+  /*Gives places a shaddow effect*/
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+.grid-container>article .articleContent {
+  padding: 2% 5% 10%;
+}
+
+.grid-container>article .headline {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  text-align: start;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.grid-container>article #city {
+  padding-top: 12%;
+  text-align: end;
+}
+
+.grid-container>article .beskrivelse {
+  text-align: start;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.grid-container>article .dyr-våben {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid-container>article .owner {
+  display: grid;
+  grid-template-columns: 1fr;
+  text-align: start;
+  max-width: 300px;
+  margin: 0 auto;
+  line-height: 0px;
+  padding: 2% 5%;
+  border-radius: 15px;
+  background-color: white;
+}
+
+.grid-container>article img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.grid-container>article a {
+  text-decoration: none;
+  color: var(--blue);
+}
+
+span {
+  font-weight: bold;
+}
+
+.input,
+select {
+  -webkit-appearance: none;
+  margin: 1em auto;
+  width: 100%;
+  max-width: 350px;
+  padding: 15px 15px;
+  box-sizing: border-box;
+  display: block;
+  background: #fff;
+  border: 0;
+  border-radius: 15px;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+button {
+  font-weight: 200;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  padding: 12px 15px;
+  margin: 1em 0 0;
+  font-size: 1em;
+  border-radius: 0;
+  color: var(--text-color-light);
+  background-color: var(--blue);
+  width: 100%;
+  max-width: 350px;
+  border-radius: 5px;
+}
+
+#button-delete {
+  color: red;
+  background-color: transparent;
+}
+
+#btn-edit {
+  background-color: #dff2f4;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 2%;
+  margin-top: 5%;
+}
+
+.disabledBtn {
+  color: transparent;
+  background-color: transparent;
+}
+
+.addToFavorite {
+  /*Makes this button have a stroke*/
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: #f1f1f1;
+  color: transparent;
+  height: 65px;
+  width: 65px;
+  border-radius: 50%;
+  font-size: 1.5em;
+  margin: 0 auto;
+}
+
+
+.addToFavorite:hover {
+  color: #f1f1f1;
+}
+
+
+.rm {
+  color: #f1f1f1;
+}
+
+.btn-place {
+  height: 65px;
+  width: 65px;
+  border-radius: 50%;
+  font-size: 1.5em;
+  margin: 0 auto;
+}
